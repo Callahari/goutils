@@ -90,52 +90,27 @@ Here is an example of how to use these functions in your Go code:
 package main
 
 import (
-    "fmt"
-    "math/rand"
-    "time"
+	"fmt"
+	"github.com/Callahari/goutils/goutils"
+	"time"
 )
 
-func RandomIntBetween(min, max int) int {
-    return rand.Intn(max-min+1) + min
-}
-
-func RandomFloat32Between(min, max float32) float32 {
-    return min + rand.Float32()*(max-min)
-}
-
-func RandomFloat64Between(min, max float64) float64 {
-    return min + rand.Float64()*(max-min)
-}
-
-func RandomDateBetween(startDate, endDate time.Time) time.Time {
-    if startDate.After(endDate) {
-        startDate, endDate = endDate, startDate
-    }
-    duration := endDate.Sub(startDate)
-    if duration == 0 {
-        return startDate
-    }
-    randomDuration := time.Duration(rand.Int63n(int64(duration)))
-    return startDate.Add(randomDuration)
-}
-
 func main() {
-    rand.Seed(time.Now().UnixNano()) // Ensure unique random results each run
+	// Random Int
+	fmt.Println("Random Int:", goutils.RandomDateBetween(1, 10))
 
-    // Random Int
-    fmt.Println("Random Int:", RandomIntBetween(1, 10))
+	// Random Float32
+	fmt.Println("Random Float32:", goutils.RandomFloat32Between(1.0, 10.0))
 
-    // Random Float32
-    fmt.Println("Random Float32:", RandomFloat32Between(1.0, 10.0))
+	// Random Float64
+	fmt.Println("Random Float64:", goutils.RandomFloat64Between(1.0, 10.0))
 
-    // Random Float64
-    fmt.Println("Random Float64:", RandomFloat64Between(1.0, 10.0))
-
-    // Random Date
-    startDate := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-    endDate := time.Date(2023, 12, 31, 0, 0, 0, 0, time.UTC)
-    fmt.Println("Random Date:", RandomDateBetween(startDate, endDate))
+	// Random Date
+	startDate := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
+	endDate := time.Date(2023, 12, 31, 0, 0, 0, 0, time.UTC)
+	fmt.Println("Random Date:", goutils.RandomDateBetween(startDate, endDate))
 }
+
 ```
 
 ## Notes
