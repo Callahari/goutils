@@ -39,7 +39,30 @@ func TestRandomDateBetween(t *testing.T) {
 		})
 	}
 }
+func TestRandomBasedOnProbability(t *testing.T) {
+	tests := []struct {
+		name        string
+		expected    bool
+		inputString string
+	}{
+		{name: "OK", expected: true, inputString: "1:1"},
+		{name: "False", expected: false, inputString: "1:20000000"},
+	}
 
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := RandomBasedOnProbability(tt.inputString)
+			if err != nil {
+				t.Errorf("RandomBasedOnProbability() error = %v", err)
+				t.FailNow()
+			}
+			if got != tt.expected {
+				t.Errorf("RandomBasedOnProbability() = %v, want %v", got, tt.expected)
+				t.FailNow()
+			}
+		})
+	}
+}
 func TestRandomFloat32Between(t *testing.T) {
 	type args struct {
 		min float32
